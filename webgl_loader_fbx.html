@@ -29,7 +29,7 @@
 		<a href="http://threejs.org" target="_blank">three.js</a> - FBXLoader test
 		</div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.js"></script>
         <script src="https://rawgithub.com/mrdoob/stats.js/master/src/Stats.js"></script>
 		<script src="https://rawgithub.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
 
@@ -129,9 +129,10 @@
 						if ( child instanceof THREE.SkinnedMesh ) {
 
                             var mixerId = mixers.length;
-                            mixers.push( new THREE.AnimationMixer( child ) );
-                            var action = new THREE.AnimationAction( child.geometry.animations[0] );
-                            mixers[ mixerId ].addAction( action );
+                            var mixer = new THREE.AnimationMixer( child );
+                            mixers.push( mixer );
+                            var action = mixer.clipAction( child.geometry.animations[0] );
+                            action.play();
 
                         }
 
